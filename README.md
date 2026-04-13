@@ -1,8 +1,9 @@
 # Restaurant_Savora
 
-Groupe 13 : Site Web d'un restaurant
+Par: Abilène
 
-Membres: Abilène Ahué, Aoumer Agnes, Djaouda Yanis et Gamouri Kamilia
+Les catégories de notre menu
 
-    Logo du restaurant
-![alt text](image.png)
+    Maquette des Catégories
+
+<img width="163" height="400" alt="image" src="https://github.com/user-attachments/assets/7bdfeaa3-2223-4d90-bf27-394997ab8405" />
