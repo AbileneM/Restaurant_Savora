@@ -1,5 +1,4 @@
 import multer from "multer";
-// Stockage de l'image ou du fichier charge
 
 const storage = multer.diskStorage({
     destination: './public/images',

@@ -1,0 +1,35 @@
+{
+  "name": "revision-js",
+  "version": "1.0.0",
+  "description": "Projet de groupe API Restaurant",
+  "keywords": [
+    "JS",
+    "node",
+    "projet API"
+  ],
+  "license": "ISC",
+  "author": "Groupe 13",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
+    "mysql2": "^3.18.1",
+    "nodemon": "^3.1.11",
+    "sequelize": "^6.37.7"
+  }
+}
