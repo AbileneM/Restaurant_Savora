@@ -1,0 +1,18 @@
+<div class="card mb-3">
+    <% if(user.photo) { %>
+        <img src="<%= user.photo %>" alt="<%= user.nom %>" style="width: 100px; height: 100px; border-radius: 50%;">
+        <% } %>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <%= user.nom %> <%= user.prenom %>
+                </h5>
+                <p class="card-text">
+                    <%= user.email %>
+                </p>
+
+                <button class="btn btn-success"><a href="/users/edit/<%=user.id%>">Edit</a></button>
+                <form action="/users/<%=user.id%>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+</div>

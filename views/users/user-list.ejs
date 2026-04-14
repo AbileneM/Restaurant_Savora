@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../head', { title: 'List of users' }) %>
+        <link rel="stylesheet" href="../../public/styles/style.css" />
+</head>
+
+<body>
+    <%- include('../header',{user}) %>
+        <main>
+            <h1>
+                <%=title %>
+            </h1>
+            <!-- <ul>
+                <% users.forEach(user=> { %>
+                    <li>
+                        <% if(user.photo) { %>
+                            <img src="<%= user.photo %>" alt="<%= user.nom %>"
+                                style="width: 50px; height: 50px; border-radius: 50%;">
+                            <% }%>
+                                <%= user.nom %> - <%= user.email %>
+                                        <button class="btn btn-success"><a
+                                                href="/users/edit/<%=user.id%>">Edit</a></button>
+                    
+                                        <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                    </li>
+                    <% }) %>
+            </ul> -->
+            <% users.forEach(user=> { %>
+                <%- include('profile', { user: user }) %>
+            <% }) %>
+<div>
+  <a href="/users/add">Create new user</a>
+</div>
+                      
+        </main>
+
+        <%- include('../footer') %>
+
+</body>
+
+</html>

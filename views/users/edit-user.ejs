@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <%- include('../head', { title: 'Edit User' }) %>
+   <link rel="stylesheet" href="../../public/styles/style.css" />
+</head>
+<body>
+    
+    <%- include('../header',{user:loggedUser}) %>
+    <main>
+        <h1><%= title %></h1>
+        <form action="/users/edit/<%=user.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nom" name="nom" value="<%=user.nom %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" value="<%=user.prenom %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%=user.email %>" required>
+            </div>
+             <!-- <div class="mb-3">
+                <label for="mdp" class="form-label">Password</label>
+                <input type="password" class="form-control" id="mdp" name="mot_de_passe" required>
+            </div>
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" class="form-control" id="photo" name="photo">
+            </div> -->
+            <button type="submit" class="btn btn-primary">Edit User</button>
+        </form>
+    </main>
+    <%- include('../footer') %>
+</body>
+</html>
