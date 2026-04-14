@@ -1,13 +1,23 @@
+import { Op } from "sequelize";
+import paginate from "../helpers/paginate.js";
 import Categorie from '../models/Categories.js';
 
+//1-Liste des catégories
 export const getAllCategories = async (req, res) => {
+    const { page, size } = req.query;
+    const { limit, offset } = paginate(page, size)
     try {
-        const categories = await Categorie.findAll();
-        res.status(200).json({data: categories});
+        const { rows: categories, count: total } = await Categorie.findAndCountAll({ limit, offset });
+        const currentPage = +page;
+        const totalPages = total ? Math.ceil(total / limit) : 1;
+            
+        res.status(200).json({data: {categories, total, currentPage, totalPages}});
     } catch (error) {
-        res.status(404).json({error: 'Une erreur est survenue lors de la récupération des catégories.'});
+        res.status(200).json({ message: error.message })
     }
 };
+
+//2-Ajouter une catégorie
 
 export const getCategorieById = async (req, res) => {
     const { id } = req.params 
