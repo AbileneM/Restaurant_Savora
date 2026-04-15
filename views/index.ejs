@@ -8,10 +8,132 @@
 </head>
 <body>
 
-  <%- include('header') %>
+    <%- include('header') %>
 
+<main>
+  <section class="hero">
+    <div class="hero-overlay"></div>
 
-  <%- include('footer') %>
+    <div class="hero-content">
+      <h1>Savora</h1>
+      <p>Fine Dining Experience</p>
+      <a href="#menu" class="hero-btn">View Menu</a>
+    </div>
+  </section>
+
+  <section class="highlights">
+    <div class="highlights-left">
+      <img src="/public/images/logo-circle.png" alt="Savora badge" class="highlights-badge">
+
+      <h2><span class="dark-text">Savora</span> <span class="gold-text">Highlights</span></h2>
+
+      <p>
+        New dishes, seasonal specials, and exclusive events — Savora Highlights
+        brings you the best of modern dining and latest updates.
+      </p>
+    </div>
+
+    <div class="highlights-right">
+      <img src="/public/images/highlight-1.jfif" alt="Restaurant interior">
+      <img src="/public/images/highlight-2.jfif" alt="Restaurant table setting">
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-text">
+      <h2>Our Story</h2>
+      <p>
+        Welcome to Savora, where culinary excellence meets elegance. Our restaurant
+        offers a refined dining experience with carefully crafted dishes and a warm atmosphere.
+      </p>
+
+      <p>
+        From fresh ingredients to beautifully presented plates, every detail is designed
+        to create a memorable moment for our guests.
+      </p>
+
+      <p>
+        At Savora, we believe great food brings people together and turns every meal
+        into a special occasion.
+      </p>
+    </div>
+
+    <div class="story-image">
+      <img src="/public/images/story.jpg" alt="Savora dining room">
+    </div>
+  </section>
+
+  <section class="bg-[#f7f5f3] py-20 px-6 md:px-10 lg:px-16">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
+      <h2 class="text-4xl md:text-5xl font-serif uppercase tracking-wide text-[#1f2d4d]">
+        New + Notable
+      </h2>
+
+      <a href="#menu" class="flex items-center gap-3 text-[#1f2d4d] text-lg font-medium hover:text-[#c58b33] transition">
+        View The Menu
+        <span class="text-2xl">→</span>
+      </a>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+      <!-- Card 1 -->
+      <div class="group text-center">
+        <div class="overflow-hidden rounded-sm shadow-md">
+          <img
+            src="/public/images/cocktail-signature.jpg"
+            alt="Signature Cocktail"
+            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+          >
+        </div>
+
+        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
+          Signature Cocktail
+        </h3>
+      </div>
+<div class="bg-red-500 text-white p-8 text-3xl">
+  Test Tailwind
+</div>
+      <!-- Card 2 -->
+      <div class="group text-center">
+        <div class="overflow-hidden rounded-sm shadow-md">
+          <img
+            src="/public/images/wine-selection.jpg"
+            alt="Wine Selection"
+            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+          >
+        </div>
+
+        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
+          Wine Selection
+        </h3>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group text-center">
+        <div class="overflow-hidden rounded-sm shadow-md">
+          <img
+            src="/public/images/gourmet-dessert.jpg"
+            alt="Gourmet Dessert"
+            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+          >
+        </div>
+
+        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
+          Gourmet Dessert
+        </h3>
+      </div>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<%- include('footer') %>
 
   <section id="menu"></section>
   <section id="reviews"></section>
