@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-import Role from "./roles.js";
 
 // Création du modèle users
 const User = sequelize.define("users", {
@@ -31,15 +30,6 @@ const User = sequelize.define("users", {
     allowNull: false
   },
 
-  // Clé étrangère qui relie users à roles
-  roleId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Role,
-      key: "id_role"
-    }
-  }
 }, {
   // Désactive createdAt et updatedAt
   timestamps: false

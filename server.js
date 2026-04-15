@@ -8,7 +8,6 @@ import dotenv from 'dotenv';
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-dotenv.config();
 
 import database from './config/db.js';
 import route from "./routes/userRoute.js";
@@ -46,9 +45,9 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 
 //Creation des tables dans la base de données
-database.sync({ alter: true })
-    .then(() => console.log('La base de données a été synchronisée avec succès.'))
-    .catch((error) => console.error('Erreur lors de la synchronisation de la base de données :', error));
+//database.sync({ alter: true })
+   // .then(() => console.log('La base de données a été synchronisée avec succès.'))
+    //.catch((error) => console.error('Erreur lors de la synchronisation de la base de données :', error));
 
 
 //Vue d'accueil
