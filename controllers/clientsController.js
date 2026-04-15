@@ -1,4 +1,4 @@
-import Client from "../models/Clients.js";
+import {Client} from "../models/Relation.js";
 
 // Récupérer tous les clients
 export const getAllClients = async (req, res) => {

@@ -45,10 +45,4 @@ const User = sequelize.define("users", {
   timestamps: false
 });
 
-// Un rôle peut avoir plusieurs utilisateurs
-Role.hasMany(User, { foreignKey: "roleId" });
-
-// Un utilisateur appartient à un seul rôle
-User.belongsTo(Role, { foreignKey: "roleId" });
-
 export default User;

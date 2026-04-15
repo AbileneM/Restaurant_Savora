@@ -31,7 +31,4 @@ const Review = sequelize.define("reviews", {
   timestamps: false
 });
 
-Client.hasMany(Review, { foreignKey: "id_client" });
-Review.belongsTo(Client, { foreignKey: "id_client" });
-
 export default Review;

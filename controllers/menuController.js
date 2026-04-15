@@ -1,5 +1,4 @@
-import Menu from "../models/Menu.js";
-import Category from "../models/Categories.js";
+import {Menu, Category} from "../models/Relation.js";
 
 // Récupérer tous les menus avec leur catégorie
 export const getAllMenus = async (req, res) => {

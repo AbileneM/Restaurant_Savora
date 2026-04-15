@@ -1,5 +1,4 @@
-import User from "../models/User.js";
-import Role from "../models/roles.js";
+import {User, Role} from "../models/Relation.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 

@@ -1,4 +1,4 @@
-import Table from "../models/Tables.js";
+import {Table} from "../models/Relation.js";
 
 // Récupérer toutes les tables
 export const getAllTables = async (req, res) => {

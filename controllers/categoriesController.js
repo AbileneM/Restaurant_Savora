@@ -1,13 +1,13 @@
 import { Op } from "sequelize";
 import paginate from "../helpers/paginate.js";
-import Categorie from '../models/Categories.js';
+import { Category } from '../models/Relation.js';
 
 //1-Liste des catégories
 export const getAllCategories = async (req, res) => {
     const { page, size } = req.query;
     const { limit, offset } = paginate(page, size)
     try {
-        const { rows: categories, count: total } = await Categorie.findAndCountAll({ limit, offset });
+        const { rows: categories, count: total } = await Category.findAndCountAll({ limit, offset });
         const currentPage = +page;
         const totalPages = total ? Math.ceil(total / limit) : 1;
             

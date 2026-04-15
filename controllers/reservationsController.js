@@ -1,6 +1,5 @@
-import Reservation from "../models/Reservations.js";
-import Client from "../models/Clients.js";
-import Table from "../models/Tables.js";
+import {Reservation, Client, Table} from "../models/Relation.js";
+
 
 // Récupérer toutes les réservations avec client et table
 export const getAllReservations = async (req, res) => {

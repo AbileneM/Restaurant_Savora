@@ -34,7 +34,4 @@ const Menu = sequelize.define("menu", {
   timestamps: false
 });
 
-Category.hasMany(Menu, { foreignKey: "id_categorie" });
-Menu.belongsTo(Category, { foreignKey: "id_categorie" });
-
 export default Menu;

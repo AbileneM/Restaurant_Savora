@@ -1,6 +1,4 @@
-import Role from "../models/roles.js";
-
-import { validationResult } from "express-validator";
+import {Role} from "../models/Relation.js";
 
 // Récupérer tous les rôles
 export const getAllRoles = async (req, res) => {
@@ -8,37 +6,41 @@ export const getAllRoles = async (req, res) => {
     const roles = await Role.findAll();
     res.status(200).json(roles);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(200).json({ message: error.message });
   }
 };
 
 // Récupérer un rôle par son id
 export const getRoleById = async (req, res) => {
-  try {
-    const role = await Role.findByPk(req.params.id);
+   const { id } = req.params
+    try {
+        const role = await Role.findByPk(id, {
+            include: {
+                model: User,
+                through: {
+                    attributes: []
+                }
+            }
+        })
+        res.status(200).json({ data: role })
 
-    if (!role) {
-      return res.status(404).json({ message: "Role introuvable" });
+    } catch (error) {
+        res.status(404).json({ message: error.message })
     }
-
-    res.status(200).json(role);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+}
 
 // Ajouter un nouveau rôle
 export const createRole = async (req, res) => {
-  try {
-    const role = await Role.create({
-      name: req.body.name
-    });
+  const role = req.body
+    try {
+        const result = await Role.create(role)
+        res.status(201).json({ message: "Rôle ajouté", data: result })
 
-    res.status(201).json(role);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    } catch (error) {
+        res.status(200).json({ message: error.message })
+    }
+
+}
 
 // Modifier un rôle par son id
 export const updateRole = async (req, res) => {
@@ -46,7 +48,7 @@ export const updateRole = async (req, res) => {
     const role = await Role.findByPk(req.params.id);
 
     if (!role) {
-      return res.status(404).json({ message: "Role introuvable" });
+      return res.status(404).json({ message: "Rôle non trouvé" });
     }
 
     await role.update({
@@ -61,16 +63,31 @@ export const updateRole = async (req, res) => {
 
 // Supprimer un rôle par son id
 export const deleteRole = async (req, res) => {
-  try {
-    const role = await Role.findByPk(req.params.id);
-
-    if (!role) {
-      return res.status(404).json({ message: "Role introuvable" });
+    const { id } = req.params
+    try {
+        const result = await Role.destroy({ where: { id } })
+        res.status(200).json({ message: `Role ${id} supprime`, data: result })
+    } catch (err) {
+        res.status(400).json({ message: err.message })
     }
 
-    await role.destroy();
-    res.status(200).json({ message: "Role supprimé" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+}
+
+// Controllers lies aux relations
+
+export const roleUsers = async (req, res) => {
+    const { id } = req.params
+    try {
+        const role = await Role.findByPk(id)
+        const users = await role.getUsers({
+            attributes:{
+                exclude:["password"]
+            },
+        })
+        res.status(200).json({ data: users })
+
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+
+}

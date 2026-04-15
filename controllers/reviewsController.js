@@ -1,5 +1,4 @@
-import Review from "../models/Reviews.js";
-import Client from "../models/Clients.js";
+import { Review, Client } from "../models/Relation.js";
 
 // Récupérer tous les avis avec leur client
 export const getAllReviews = async (req, res) => {

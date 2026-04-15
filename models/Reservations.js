@@ -41,10 +41,5 @@ const Reservation = sequelize.define("reservations", {
   timestamps: false
 });
 
-Client.hasMany(Reservation, { foreignKey: "id_client" });
-Reservation.belongsTo(Client, { foreignKey: "id_client" });
-
-Table.hasMany(Reservation, { foreignKey: "id_table" });
-Reservation.belongsTo(Table, { foreignKey: "id_table" });
 
 export default Reservation;
