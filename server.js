@@ -52,6 +52,19 @@ app.set('views', './views')
 
 //Vue d'accueil
 app.get('/', (req, res) => res.render('index'));
+app.get('/menu', (req, res) => {
+  res.render('menu');
+});
+app.get('/reviews', (req, res) => {
+  res.render('reviews');
+});
+app.get('/table', (req, res) => {
+  res.render('table');
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
 //Les routes
 app.use("/api/auth", authRoute);

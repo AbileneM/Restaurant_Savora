@@ -1,18 +1,92 @@
-<header class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-logo">
-      <img src="/public/images/SavoraLogo.png" alt="Savora Logo">
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+  <nav class="max-w-7xl mx-auto px-6 py-5">
+    
+    <div class="flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="/">
+        <img src="/public/images/SavoraLogo.png" alt="Savora Restaurant" class="h-25 md:h-27">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8 text-[#1f2d4d] font-medium">
+        <a href="/" class="hover:text-amber-700 transition-colors">
+          Home
+        </a>
+
+        <a href="/menu" class="hover:text-amber-700 transition-colors">
+          Menu
+        </a>
+
+        <a href="/reviews" class="hover:text-amber-700 transition-colors">
+          Review
+        </a>
+
+        <a href="/login" class="hover:text-amber-700 transition-colors">
+          Login
+        </a>
+
+        <a
+          href="/table"
+          class="bg-[#9d7e4a] hover:bg-[#8a6d3f] text-white px-8 py-3 rounded-lg transition-colors flex items-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+
+          Book a Table
+        </a>
+      </div>
+
+      <!-- Mobile Button -->
+      <button id="mobile-menu-button" class="md:hidden p-2">
+        <div class="w-6 h-5 flex flex-col justify-between">
+          <span class="block h-0.5 w-full bg-black"></span>
+          <span class="block h-0.5 w-full bg-black"></span>
+          <span class="block h-0.5 w-full bg-black"></span>
+        </div>
+      </button>
     </div>
 
-    <nav class="navbar-links">
-      <a href="#menu">Menu</a>
-      <a href="#reviews">Reviews</a>
-      <a href="/login">Login</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4 text-[#1f2d4d] font-medium">
+      <a href="/" class="hover:text-amber-700 transition-colors">
+        Home
+      </a>
 
-      <a href="#contact" class="book-btn">
-        <span class="book-icon">📅</span>
+      <a href="/menu" class="hover:text-amber-700 transition-colors">
+        Menu
+      </a>
+
+      <a href="/reviews" class="hover:text-amber-700 transition-colors">
+        Review
+      </a>
+
+      <a href="/login" class="hover:text-amber-700 transition-colors">
+        Login
+      </a>
+
+      <a
+        href="/table"
+        class="bg-[#9d7e4a] hover:bg-[#8a6d3f] text-white px-6 py-2 rounded-lg transition-colors flex items-center gap-2 w-fit"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+
         Book a Table
       </a>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>

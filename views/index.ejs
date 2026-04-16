@@ -1,136 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant</title>
-  <link rel="stylesheet" href="/public/styles/style.css">
-</head>
+<%- include('head') %>
 <body>
 
     <%- include('header') %>
 
 <main>
-  <section class="hero">
-    <div class="hero-overlay"></div>
+  <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
 
-    <div class="hero-content">
-      <h1>Savora</h1>
-      <p>Fine Dining Experience</p>
-      <a href="#menu" class="hero-btn">View Menu</a>
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/public/images/background_img.jfif"
+      alt="Elegant restaurant interior"
+      class="w-full h-full object-cover"
+    >
+
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center text-white px-6">
+    <h1 class="text-5xl md:text-7xl font-serif mb-4">
+      Savora
+    </h1>
+
+    <p class="text-xl md:text-2xl mb-8 text-gray-200">
+      Fine Dining Experience
+    </p>
+
+    <a
+      href="/menu"
+      class="inline-block bg-amber-700 hover:bg-amber-800 text-white px-8 py-3 rounded-full transition-colors"
+    >
+      View Menu
+    </a>
+  </div>
+
+</section>
+
+<section class="bg-white py-20 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    
+    <img
+      src="/public/images/logo-circle.png"
+      alt="Savora Highlights Badge"
+      class="w-96 md:w-84 mx-auto mb-10"
+    >
+
+    <h2 class="text-4xl md:text-6xl font-serif mb-8">
+  <span class="text-[#1f2d4d]">Savora</span>
+  <span class="text-[#b8873a] italic font-light">Highlights</span>
+</h2>
+
+    <p class="text-[#3f4b63] text-lg md:text-xl leading-10 max-w-3xl mx-auto">
+      New dishes, seasonal specials, and exclusive events — Savora
+      Highlights brings you the best of modern dining and latest updates.
+    </p>
+
+  </div>
+</section>
+
+<section id="about" class="py-20 px-6 bg-[#f7f5f3]">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Text -->
+      <div>
+        <h2 class="text-4xl md:text-5xl font-serif text-[#1f2d4d] mb-6">
+          Our Story
+        </h2>
+
+        <p class="text-gray-700 mb-4 leading-8">
+          Welcome to Savora, where culinary artistry meets elegant ambiance.
+          Since our opening, we've been dedicated to providing an unforgettable
+          dining experience that celebrates both tradition and innovation.
+        </p>
+
+        <p class="text-gray-700 mb-4 leading-8">
+          Our talented chefs craft each dish with the finest locally-sourced
+          ingredients, ensuring every plate is a masterpiece. From intimate
+          dinners to special celebrations, we're here to make your moments memorable.
+        </p>
+
+        <p class="text-gray-700 leading-8">
+          Join us and discover why Savora has become the destination for those
+          seeking exceptional cuisine in a sophisticated setting.
+        </p>
+      </div>
+
+      <!-- Images -->
+      <div class="grid grid-cols-2 gap-4">
+        <img
+          src="/public/images/highlight-1.jfif"
+          alt="Elegant chandeliers"
+          class="w-full h-64 object-cover rounded-lg shadow-lg"
+        >
+
+        <img
+          src="/public/images/highlight-2.jfif"
+          alt="Restaurant table setting"
+          class="w-full h-64 object-cover rounded-lg shadow-lg mt-8"
+        >
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+ 
+<section class="bg-white py-16 px-6 md:px-10 lg:px-14">
+  <div class="max-w-[1800px] mx-auto">
 
-  <section class="highlights">
-    <div class="highlights-left">
-      <img src="/public/images/logo-circle.png" alt="Savora badge" class="highlights-badge">
-
-      <h2><span class="dark-text">Savora</span> <span class="gold-text">Highlights</span></h2>
-
-      <p>
-        New dishes, seasonal specials, and exclusive events — Savora Highlights
-        brings you the best of modern dining and latest updates.
-      </p>
-    </div>
-
-    <div class="highlights-right">
-      <img src="/public/images/highlight-1.jfif" alt="Restaurant interior">
-      <img src="/public/images/highlight-2.jfif" alt="Restaurant table setting">
-    </div>
-  </section>
-
-  <section class="story">
-    <div class="story-text">
-      <h2>Our Story</h2>
-      <p>
-        Welcome to Savora, where culinary excellence meets elegance. Our restaurant
-        offers a refined dining experience with carefully crafted dishes and a warm atmosphere.
-      </p>
-
-      <p>
-        From fresh ingredients to beautifully presented plates, every detail is designed
-        to create a memorable moment for our guests.
-      </p>
-
-      <p>
-        At Savora, we believe great food brings people together and turns every meal
-        into a special occasion.
-      </p>
-    </div>
-
-    <div class="story-image">
-      <img src="/public/images/story.jpg" alt="Savora dining room">
-    </div>
-  </section>
-
-  <section class="bg-[#f7f5f3] py-20 px-6 md:px-10 lg:px-16">
-  <div class="max-w-7xl mx-auto">
-
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
-      <h2 class="text-4xl md:text-5xl font-serif uppercase tracking-wide text-[#1f2d4d]">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+      <h2 class="text-[#0f3550] text-3xl md:text-4xl lg:text-6xl uppercase tracking-wide font-serif">
         New + Notable
       </h2>
 
-      <a href="#menu" class="flex items-center gap-3 text-[#1f2d4d] text-lg font-medium hover:text-[#c58b33] transition">
+      <a
+        href="/menu"
+        class="inline-flex items-center gap-3 text-[#0f3550] text-lg md:text-xl font-medium hover:text-[#b8873a] transition-colors"
+      >
         View The Menu
         <span class="text-2xl">→</span>
       </a>
     </div>
 
-    <!-- Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-
-      <!-- Card 1 -->
-      <div class="group text-center">
-        <div class="overflow-hidden rounded-sm shadow-md">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+      
+      <article class="text-center">
+        <div class="overflow-hidden">
           <img
-            src="/public/images/cocktail-signature.jpg"
-            alt="Signature Cocktail"
-            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+            src="/public/images/Menu_steaks.png"
+            alt="Surf&Turf"
+            class="w-full h-[320px] md:h-[420px] lg:h-[460px] object-cover"
           >
         </div>
-
-        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
-          Signature Cocktail
+        <h3 class="mt-6 text-[#0f3550] text-2xl md:text-2xl uppercase font-medium tracking-wide">
+          Surf&Turf 
         </h3>
-      </div>
-<div class="bg-red-500 text-white p-8 text-3xl">
-  Test Tailwind
-</div>
-      <!-- Card 2 -->
-      <div class="group text-center">
-        <div class="overflow-hidden rounded-sm shadow-md">
+      </article>
+
+      <article class="text-center">
+        <div class="overflow-hidden">
           <img
-            src="/public/images/wine-selection.jpg"
-            alt="Wine Selection"
-            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+            src="/public/images/cocktail-signature.png"
+            alt="Cocktail Crush"
+            class="w-full h-[320px] md:h-[420px] lg:h-[460px] object-cover"
           >
         </div>
-
-        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
-          Wine Selection
+        <h3 class="mt-6 text-[#0f3550] text-2xl md:text-2xl uppercase font-medium tracking-wide">
+          Signature Cocktails
         </h3>
-      </div>
+      </article>
 
-      <!-- Card 3 -->
-      <div class="group text-center">
-        <div class="overflow-hidden rounded-sm shadow-md">
+      <article class="text-center">
+        <div class="overflow-hidden">
           <img
-            src="/public/images/gourmet-dessert.jpg"
+            src="/public/images/gourmet-dessert.png"
             alt="Gourmet Dessert"
-            class="w-full h-[500px] object-cover transition duration-500 group-hover:scale-105"
+            class="w-full h-[320px] md:h-[420px] lg:h-[460px] object-cover"
           >
         </div>
-
-        <h3 class="mt-6 text-2xl uppercase tracking-wide text-[#1f2d4d] font-medium">
+        <h3 class="mt-6 text-[#0f3550] text-2xl md:text-2xl uppercase font-medium tracking-wide">
           Gourmet Dessert
         </h3>
-      </div>
+      </article>
 
     </div>
   </div>
 </section>
+  
 </main>
 
 <%- include('footer') %>
