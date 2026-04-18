@@ -29,13 +29,14 @@ Pour démarrer le site de Savora
 4. Ensuite recharge ta page.
 
 ````
-    Étape de conception du site
+   Conception du site
 
 ````
 1. Faire des recherche pour visualiser le genre de restaurant que Savora soit
 2. Assigner un nom à notre restaurant et créer un logo (I.A)
 3. Créer des maquettes des différentes avec Figma
-4. Nos images proviennet de I.A et du site (https://unsplash.com/fr)
+4. Le site utilise EJS et le framework Tailwind CSS
+5. Nos images proviennet de I.A et du site (https://unsplash.com/fr)
 <img width="600" height="278" alt="ChatGPT Image" src="https://github.com/user-attachments/assets/a97dcdf5-9b14-4a1c-bded-07efb754dedf" />
 <img width="340" height="410" alt="kevin-kelly-PPneSBqfCCU-unsplash" src="https://github.com/user-attachments/assets/cb00e456-c529-4bc4-80e8-e53f6fa25592" />
 
