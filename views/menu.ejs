@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('head') %>
+
+  <body class="scroll-smooth bg-[#f7f4ef] text-[#1f2937]">
+  <div class="min-h-screen lg:flex">
+
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-[260px] shrink-0 border-r border-[#ddd6cc] bg-[#f7f4ef] px-8 py-10">
+      <div class="mb-10">
+        <a href="/" class="block">
+          <img src="/public/images/SavoraLogo.png" alt="Savora Logo" class="h-20 w-auto">
+        </a>
+      </div>
+
+      <nav class="flex flex-col gap-4 text-[17px] text-[#1d2d50]">
+        <a href="/" class="transition hover:text-[#b08a4a]">Home</a>
+        <a href="/menu" class="font-semibold text-[#b08a4a]">Menu</a>
+        <a href="/review" class="transition hover:text-[#b08a4a]">Review</a>
+        <a href="/login" class="transition hover:text-[#b08a4a]">Login</a>
+      </nav>
+
+      <div class="mt-10 border-t border-[#ddd6cc] pt-6">
+        <p class="text-xs uppercase tracking-[0.2em] text-[#7b7b7b]">Location</p>
+        <p class="mt-2 text-lg font-medium text-[#1d2d50]">Orleans</p>
+      </div>
+
+      <div class="mt-8">
+        <a
+          href="/reservation"
+          class="inline-flex items-center gap-3 rounded-md bg-[#b08a4a] px-5 py-3 font-medium text-white transition hover:opacity-90"
+        >
+          Book a Table
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 px-6 py-8 md:px-10">
+      <div class="mx-auto max-w-6xl">
+
+        <!-- Hero -->
+        <section class="bg-[#1d2d50] px-8 py-10 text-white md:px-10 md:py-12">
+          <h1 class="text-4xl font-bold md:text-5xl">Menu</h1>
+          <p class="mt-2 text-3xl italic text-[#e9dcc7] md:text-4xl">Savora Orleans</p>
+
+          <div class="mt-8 space-y-2 text-sm text-[#f3ede4]">
+            <p>4005 Dundas Road, Orleans</p>
+          </div>
+        </section>
+
+        <!-- Nav catégories -->
+        <section class="mt-5">
+          <div class="flex flex-wrap gap-4">
+            <a href="#appetizers"
+               class="border border-[#1d2d50] bg-[#1d2d50] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90">
+              Appetizers
+            </a>
+
+            <a href="#salads"
+               class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+              Salads
+            </a>
+
+            <a href="#steaks"
+               class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+              Steaks
+            </a>
+
+            <a href="#desserts"
+               class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+              Desserts
+            </a>
+
+            <a href="#wines"
+                 class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+                Wines
+            </a>
+            <a href="#cocktails"
+                 class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+              Cocktails
+            </a>
+
+        <a href="#nonalcoholic"
+                 class="border border-[#d4c7b8] bg-white px-4 py-2 text-sm font-medium text-[#b08a4a] transition hover:bg-[#1d2d50] hover:text-white">
+            Non-Alcoholic
+             </a>
+          </div>
+
+    </section>
+
+        
+        <!-- APPETIZERS -->
+        <section id="appetizers" class="pt-20">
+          <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+            <div class="min-w-0 flex-1">
+              <div class="mb-8 flex items-center gap-4">
+                <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Appetizers</h2>
+                <div class="h-px flex-1 bg-[#cbb79a]"></div>
+              </div>
+
+              <div class="space-y-8">
+                <div>
+                  <div class="flex items-center gap-4">
+                    <h3 class="font-serif text-2xl text-[#111827]">Truffle Fries</h3>
+                    <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                    <span class="text-xl text-[#6b4f3b]">14</span>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-[15px] leading-7 text-[#5f6772]">
+                    Crispy fries, parmesan, white truffle aioli, finely grated parmesan.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-4">
+                    <h3 class="font-serif text-2xl text-[#111827]">Burrata & Heirloom Tomatoes</h3>
+                    <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                    <span class="text-xl text-[#6b4f3b]">17</span>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-[15px] leading-7 text-[#5f6772]">
+                    Creamy burrata, heirloom tomatoes, basil pesto, balsamic glaze, toasted baguette.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-4">
+                    <h3 class="font-serif text-2xl text-[#111827]">Crispy Calamari</h3>
+                    <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                    <span class="text-xl text-[#6b4f3b]">16</span>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-[15px] leading-7 text-[#5f6772]">
+                    Crispy calamari, spicy aioli, cherry tomatoes, pickled onions, fresh herbs, lemon wedge.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-4">
+                    <h3 class="font-serif text-2xl text-[#111827]">Beef Carpaccio</h3>
+                    <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                    <span class="text-xl text-[#6b4f3b]">21</span>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-[15px] leading-7 text-[#5f6772]">
+                    Thinly sliced beef tenderloin, arugula, shaved parmesan, capers, balsamic reduction.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full shrink-0 xl:w-[340px]">
+              <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+                <img
+                  src="/public/images/Menu_Entrees.png"
+                  alt="Crispy Calamari"
+                  class="h-[380px] w-full object-cover"
+                >
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SALADS -->
+        <section id="salads" class="pt-20">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Salads</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Savora Caesar</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">15</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Romaine, parmesan, croutons, bacon, house Caesar dressing.
+              </p>
+            </div>
+
+             <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Beet & Goat Cheese</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">16</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Roasted beets, whipped goat cheese, arugula, candied pecans, citrus vinaigrette.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Mediterranean Salad</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">17</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Mixed greens, cucumber, cherry tomatoes, olives, feta, red onions, oregano vinaigrette.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Warm Halloumi Salad</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">18</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Grilled halloumi, baby greens, roasted peppers, avocado, lemon-herb dressing.
+              </p>
+            </div>
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/Menu_salades .png"
+          alt="Salad"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+        <!-- STEAKS -->
+       <section id="steaks" class="pt-20">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Steaks</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <!-- tes items Steaks ici -->
+        <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">6oz Filet Mignon</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">42</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Tender center-cut filet served with garlic mashed potatoes and seasonal vegetables.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">10oz New York Strip</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">39</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Classic striploin, grilled to order, finished with herb butter and crispy fries.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Ribeye 12oz</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">46</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Rich marbling, flame grilled, served with roasted mushrooms and truffle jus.
+              </p>
+            </div>
+
+             <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Steak Frites</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">34</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Grilled sirloin, peppercorn sauce, parmesan fries, watercress salad.
+              </p>
+            </div>
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/Menu_Steaks.png"
+          alt="Steak"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+        <!-- DESSERTS -->
+        <section id="desserts" class="pt-20 pb-16">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Desserts</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Chocolate Lava Cake</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">12</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Warm chocolate cake with molten center, vanilla bean ice cream, cocoa dust.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Crème Brûlée</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">11</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Classic vanilla custard with caramelized sugar top and fresh berries.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Tiramisu</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">10</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Espresso-soaked ladyfingers, mascarpone cream, cocoa powder.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <h3 class="font-serif text-2xl">Seasonal Cheesecake</h3>
+                <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+                <span class="text-xl text-[#6b4f3b]">12</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+                Creamy baked cheesecake with seasonal fruit compote and buttery crumble.
+              </p>
+            </div>
+        
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/gourmet-dessert.png"
+          alt="Dessert"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WINES -->
+<section id="wines" class="pt-15">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Wines</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Cabernet Sauvignon</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">15</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Rich full-bodied red wine with notes of blackberry, oak and spice.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Pinot Noir</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">14</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Smooth and elegant red wine with cherry and raspberry aromas.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Chardonnay</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">13</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Crisp white wine with citrus, vanilla and light buttery notes.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Rosé Provence</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">12</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Fresh and delicate rosé with strawberry and peach notes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/vins.jpg"
+          alt="Wine"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COCKTAILS -->
+<section id="cocktails" class="pt-16">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Cocktails</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Savora Martini</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">16</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Vodka, elderflower liqueur, lemon twist and fresh herbs.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Classic Mojito</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">14</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            White rum, mint, lime, sugar and sparkling soda water.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Espresso Martini</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">17</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Vodka, espresso, coffee liqueur and vanilla syrup.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Smoked Old Fashioned</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">18</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Bourbon, bitters, orange peel and smoked maple syrup.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/cocktail-signature.png"
+          alt="Cocktail"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NON-ALCOHOLIC -->
+<section id="nonalcoholic" class="pt-20 pb-20">
+  <div class="flex flex-col items-start gap-10 xl:flex-row">
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-8 flex items-center gap-4">
+        <h2 class="font-serif text-4xl font-bold uppercase text-[#1d2d50]">Non-Alcoholic</h2>
+        <div class="h-px flex-1 bg-[#cbb79a]"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Sparkling Citrus</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">8</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Sparkling water with fresh orange, lime and mint.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Berry Lemonade</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">7</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Homemade lemonade infused with strawberries and blueberries.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Virgin Mojito</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">9</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Lime, mint, sugar and soda water without alcohol.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h3 class="font-serif text-2xl">Fresh Mango Smoothie</h3>
+            <div class="h-px flex-1 bg-[#d8cbb9]"></div>
+            <span class="text-xl text-[#6b4f3b]">10</span>
+          </div>
+          <p class="mt-2 text-[15px] leading-7 text-[#5f6772]">
+            Mango, pineapple, yogurt and coconut milk blended fresh.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full shrink-0 xl:w-[340px]">
+      <div class="overflow-hidden border border-[#ddd6cc] bg-white p-3 shadow-sm">
+        <img
+          src="/public/images/lemonnade.jpg"
+          alt="Non Alcoholic Drink"
+          class="h-[380px] w-full object-cover"
+        >
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+      </div>
+    </main>
+  </div>
+
+  <%- include('footer') %>
+</body>
+</html>
