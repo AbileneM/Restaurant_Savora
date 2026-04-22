@@ -15,7 +15,7 @@ const autoriser = roles => async (req, res, next) => {
         const userRoles = await user.getRoles()
 
         let hasRole = false
-        const userRoleTitles = userRoles.map(role => role.titre.toLowerCase())
+        const userRoleTitles = userRoles.map(role => role.name.toLowerCase())
 
         if (!userRoles.length) return res.status(403).json({ message: "Vous n'avez pas la permission!" })
 

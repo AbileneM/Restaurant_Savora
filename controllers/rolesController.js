@@ -1,4 +1,4 @@
-import {Role} from "../models/Relation.js";
+import { Role, User } from "../models/Relation.js";
 
 // Récupérer tous les rôles
 export const getAllRoles = async (req, res) => {
@@ -6,7 +6,7 @@ export const getAllRoles = async (req, res) => {
     const roles = await Role.findAll();
     res.status(200).json(roles);
   } catch (error) {
-    res.status(200).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -22,6 +22,8 @@ export const getRoleById = async (req, res) => {
                 }
             }
         })
+        if (!role) return res.status(404).json({ message: "Role non trouve" })
+
         res.status(200).json({ data: role })
 
     } catch (error) {
@@ -37,7 +39,7 @@ export const createRole = async (req, res) => {
         res.status(201).json({ message: "Rôle ajouté", data: result })
 
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.status(400).json({ message: error.message })
     }
 
 }
@@ -65,7 +67,9 @@ export const updateRole = async (req, res) => {
 export const deleteRole = async (req, res) => {
     const { id } = req.params
     try {
-        const result = await Role.destroy({ where: { id } })
+        const result = await Role.destroy({ where: { id_role: id } })
+        if (!result) return res.status(404).json({ message: "Role non trouve" })
+
         res.status(200).json({ message: `Role ${id} supprime`, data: result })
     } catch (err) {
         res.status(400).json({ message: err.message })
@@ -79,6 +83,8 @@ export const roleUsers = async (req, res) => {
     const { id } = req.params
     try {
         const role = await Role.findByPk(id)
+        if (!role) return res.status(404).json({ message: "Role non trouve" })
+
         const users = await role.getUsers({
             attributes:{
                 exclude:["password"]
