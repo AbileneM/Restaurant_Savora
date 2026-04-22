@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('../head') %>
+<link rel="stylesheet" href="/public/styles/admin.css?v=1">
+
+<body>
+  <%- include('../header') %>
+
+  <main class="admin-main">
+    <section class="admin-container">
+      <p class="admin-kicker">Back office</p>
+      <h1 class="admin-title"><%= title %></h1>
+
+      <div class="admin-grid">
+        <% Object.entries(resources).forEach(([name, resource]) => { %>
+          <a href="/admin/<%= name %>" class="admin-card"><%= resource.title %></a>
+        <% }) %>
+        <a href="/roles" class="admin-card">Roles</a>
+        <a href="/users" class="admin-card">Users</a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('../footer') %>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('head') %>
+<link rel="stylesheet" href="/public/styles/reservation.css?v=1">
+
+<body>
+  <%- include('header') %>
+
+  <main class="reservation-main">
+    <section class="reservation-container">
+      <p class="reservation-kicker">Savora Orleans</p>
+      <h1 class="reservation-title">Reserver une table</h1>
+
+      <div class="reservation-card">
+        <% if (success) { %>
+          <div class="reservation-success"><%= success %></div>
+        <% } %>
+
+        <% if (error) { %>
+          <div class="reservation-error"><%= error %></div>
+        <% } %>
+
+        <form action="/reservation" method="POST" class="reservation-form">
+          <div class="reservation-grid">
+            <div>
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" value="<%= form.nom || '' %>" required>
+            </div>
+
+            <div>
+              <label for="prenom">Prenom</label>
+              <input type="text" id="prenom" name="prenom" value="<%= form.prenom || '' %>" required>
+            </div>
+
+            <div>
+              <label for="telephone">Telephone</label>
+              <input type="text" id="telephone" name="telephone" value="<%= form.telephone || '' %>">
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" value="<%= form.email || '' %>" required>
+            </div>
+
+            <div>
+              <label for="date_reservation">Date</label>
+              <input type="date" id="date_reservation" name="date_reservation" value="<%= form.date_reservation || '' %>" required>
+            </div>
+
+            <div>
+              <label for="heure_reservation">Heure</label>
+              <input type="time" id="heure_reservation" name="heure_reservation" value="<%= form.heure_reservation || '' %>" required>
+            </div>
+
+            <div>
+              <label for="nombre_personnes">Personnes</label>
+              <input type="number" id="nombre_personnes" name="nombre_personnes" min="1" value="<%= form.nombre_personnes || '' %>" required>
+            </div>
+
+            <div>
+              <label for="id_table">Table</label>
+              <select id="id_table" name="id_table" required>
+                <option value="">Choisir une table</option>
+                <% tables.forEach(table => { %>
+                  <option value="<%= table.id_table %>" <%= Number(form.id_table) === table.id_table ? 'selected' : '' %>>
+                    Table <%= table.id_table %> - <%= table.capacite %> places
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="reservation-button">Confirmer la reservation</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+</body>
+</html>

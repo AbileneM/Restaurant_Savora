@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('../head') %>
+<link rel="stylesheet" href="/public/styles/admin.css?v=1">
+
+<body>
+  <%- include('../header') %>
+
+  <main class="admin-main">
+    <section class="admin-container">
+      <div class="admin-toolbar">
+        <div>
+          <a href="/admin/<%= resourceName %>" class="admin-link">Retour</a>
+          <h1 class="admin-title"><%= mode === 'add' ? 'Ajouter' : 'Modifier' %> - <%= resource.title %></h1>
+        </div>
+      </div>
+
+      <% if (error) { %>
+        <div class="admin-error"><%= error %></div>
+      <% } %>
+
+      <form action="<%= mode === 'add' ? `/admin/${resourceName}` : `/admin/${resourceName}/${record[resource.pk]}?_method=PUT` %>" method="POST" class="admin-form">
+        <% resource.fields.forEach(field => { %>
+          <div>
+            <label for="<%= field.name %>"><%= field.label %></label>
+
+            <% if (field.type === 'textarea') { %>
+              <textarea id="<%= field.name %>" name="<%= field.name %>" <%= field.required ? 'required' : '' %>><%= record[field.name] || '' %></textarea>
+            <% } else if (field.type === 'select') { %>
+              <select id="<%= field.name %>" name="<%= field.name %>" <%= field.required ? 'required' : '' %>>
+                <option value="">Choisir</option>
+                <% (refs[field.options] || []).forEach(option => { %>
+                  <option value="<%= option[field.optionValue] %>" <%= Number(record[field.name]) === Number(option[field.optionValue]) ? 'selected' : '' %>>
+                    <%= optionLabel(field, option) %>
+                  </option>
+                <% }) %>
+              </select>
+            <% } else if (field.type === 'checkbox') { %>
+              <input type="checkbox" id="<%= field.name %>" name="<%= field.name %>" <%= record[field.name] ? 'checked' : '' %>>
+            <% } else { %>
+              <input
+                type="<%= field.type %>"
+                id="<%= field.name %>"
+                name="<%= field.name %>"
+                value="<%= record[field.name] || '' %>"
+                <%= field.step ? `step="${field.step}"` : '' %>
+                <%= field.required ? 'required' : '' %>
+              >
+            <% } %>
+          </div>
+        <% }) %>
+
+        <div class="admin-actions">
+          <button type="submit" class="admin-button"><%= mode === 'add' ? 'Enregistrer' : 'Mettre a jour' %></button>
+          <a href="/admin/<%= resourceName %>" class="admin-link">Annuler</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <%- include('../footer') %>
+</body>
+</html>

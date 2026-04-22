@@ -27,6 +27,8 @@ import reviewsRoute from "./routes/reviewRoute.js";
 import rolesRoute from "./routes/roleRoute.js";
 import roleWebRoute from "./routes/roleWebRoute.js";
 import userWebRoute from "./routes/userWebRoute.js";
+import adminWebRoute from "./routes/adminWebRoute.js";
+import reservationWebRoute from "./routes/reservationWebRoute.js";
 
 
 const app = express();
@@ -64,9 +66,7 @@ app.get('/menu', (req, res) => {
 app.get('/reviews', (req, res) => {
   res.render('reviews');
 });
-app.get('/table', (req, res) => {
-  res.render('table');
-});
+app.get('/table', (req, res) => res.redirect('/reservation'));
 
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Connexion', error: null, email: '' });
@@ -86,8 +86,10 @@ app.use("/api/roles", rolesRoute);
 app.use("/api/users", route);
 
 //Routes EJS
+app.use("/admin", adminWebRoute);
 app.use("/roles", roleWebRoute);
 app.use("/users", userWebRoute);
+app.use("/reservation", reservationWebRoute);
 
 
 app.use('/public', express.static('public'))
