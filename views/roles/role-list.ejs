@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('../head') %>
+<link rel="stylesheet" href="/public/styles/roles.css?v=1">
+
+<body class="min-h-screen bg-[#f7f4ef] text-[#1f2937]">
+  <%- include('../header') %>
+
+  <main class="roles-main">
+    <section class="roles-container">
+      <div class="roles-toolbar">
+        <div>
+          <p class="roles-kicker">Administration</p>
+          <h1 class="roles-title"><%= title %></h1>
+        </div>
+
+        <a href="/roles/add" class="roles-button">
+          Ajouter un role
+        </a>
+      </div>
+
+      <% if (error) { %>
+        <div class="roles-error">
+          <%= error %>
+        </div>
+      <% } %>
+
+      <div class="roles-card">
+        <table class="roles-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom du role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (!roles.length) { %>
+              <tr>
+                <td colspan="3" class="roles-muted">Aucun role trouve.</td>
+              </tr>
+            <% } %>
+
+            <% roles.forEach((role) => { %>
+              <tr>
+                <td><%= role.id_role %></td>
+                <td><strong><%= role.name %></strong></td>
+                <td>
+                  <div class="roles-actions">
+                    <a href="/roles/<%= role.id_role %>/users" class="roles-link">
+                      Utilisateurs
+                    </a>
+
+                    <a href="/roles/edit/<%= role.id_role %>" class="roles-link">
+                      Modifier
+                    </a>
+
+                    <form action="/roles/<%= role.id_role %>?_method=DELETE" method="POST">
+                      <button type="submit" class="roles-danger">
+                        Supprimer
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <%- include('../footer') %>
+</body>
+</html>

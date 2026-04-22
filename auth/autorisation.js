@@ -1,4 +1,4 @@
-import { User } from '../models/Relation.js'
+import { User, Role } from '../models/Relation.js'
 
 const autoriser = roles => async (req, res, next) => {
 
@@ -8,14 +8,14 @@ const autoriser = roles => async (req, res, next) => {
     //Chercher la personne dans la base de données
 
     try {
-        const user = await User.findByPk(id)
+        const user = await User.findByPk(id, { include: Role })
         if (!user) return res.status(404).json({ message: "Cet utilisateur n'existe pas!" })
 
         //Récuperer le rôle de la personne 
-        const userRoles = await user.getRoles()
+        const userRoles = user.role ? [user.role] : []
 
         let hasRole = false
-        const userRoleTitles = userRoles.map(role => role.titre.toLowerCase())
+        const userRoleTitles = userRoles.map(role => role.name.toLowerCase())
 
         if (!userRoles.length) return res.status(403).json({ message: "Vous n'avez pas la permission!" })
 
