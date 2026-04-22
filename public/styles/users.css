@@ -1,0 +1,157 @@
+.users-main {
+  background: #f7f4ef;
+  color: #1f2937;
+  min-height: 60vh;
+  padding: 260px 32px 72px;
+}
+
+.users-container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.users-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.users-kicker {
+  color: #b08a4a;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.users-title {
+  color: #1d2d50;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 42px;
+  margin-top: 8px;
+}
+
+.users-card {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  overflow: hidden;
+}
+
+.users-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.users-table th {
+  background: #1d2d50;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  padding: 14px 18px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.users-table td {
+  border-top: 1px solid #eee5da;
+  padding: 14px 18px;
+}
+
+.users-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.users-button,
+.users-link,
+.users-danger {
+  border-radius: 6px;
+  display: inline-flex;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.users-button {
+  background: #1d2d50;
+  color: #fff;
+}
+
+.users-button:hover {
+  background: #b08a4a;
+}
+
+.users-link {
+  border: 1px solid #d4c7b8;
+  color: #1d2d50;
+}
+
+.users-danger {
+  background: #b91c1c;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.users-form {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  display: grid;
+  gap: 20px;
+  padding: 28px;
+}
+
+.users-form label {
+  color: #1d2d50;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.users-form input,
+.users-form select {
+  border: 1px solid #d4c7b8;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.users-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #b91c1c;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+}
+
+.users-muted {
+  color: #5f6772;
+}
+
+@media (max-width: 760px) {
+  .users-main {
+    padding: 220px 18px 56px;
+  }
+
+  .users-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .users-title {
+    font-size: 34px;
+  }
+}

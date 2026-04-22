@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('../head') %>
+<link rel="stylesheet" href="/public/styles/users.css?v=1">
+
+<body>
+  <%- include('../header') %>
+
+  <main class="users-main">
+    <section class="users-container">
+      <div class="users-toolbar">
+        <div>
+          <a href="/users" class="users-link">Retour aux utilisateurs</a>
+          <h1 class="users-title"><%= title %></h1>
+        </div>
+      </div>
+
+      <% if (error) { %>
+        <div class="users-error"><%= error %></div>
+      <% } %>
+
+      <form action="/users" method="POST" class="users-form">
+        <div>
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" value="<%= user.nom || '' %>" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="<%= user.email || '' %>" required>
+        </div>
+
+        <div>
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <div>
+          <label for="roleId">Role</label>
+          <select id="roleId" name="roleId">
+            <option value="">Aucun role</option>
+            <% roles.forEach((role) => { %>
+              <option value="<%= role.id_role %>" <%= Number(user.roleId) === role.id_role ? 'selected' : '' %>><%= role.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="users-actions">
+          <button type="submit" class="users-button">Enregistrer</button>
+          <a href="/users" class="users-link">Annuler</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <%- include('../footer') %>
+</body>
+</html>

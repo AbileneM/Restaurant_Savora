@@ -24,6 +24,7 @@ import reservationsRoute from "./routes/reservationRoute.js";
 import reviewsRoute from "./routes/reviewRoute.js";
 import rolesRoute from "./routes/roleRoute.js";
 import roleWebRoute from "./routes/roleWebRoute.js";
+import userWebRoute from "./routes/userWebRoute.js";
 
 
 const app = express();
@@ -78,9 +79,11 @@ app.use("/api/tables", tableRoute);
 app.use("/api/reservations", reservationsRoute);
 app.use("/api/reviews", reviewsRoute);
 app.use("/api/roles", rolesRoute);
+app.use("/api/users", route);
 
 //Routes EJS
 app.use("/roles", roleWebRoute);
+app.use("/users", userWebRoute);
 
 
 app.use('/public', express.static('public'))
