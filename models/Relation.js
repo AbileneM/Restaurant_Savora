@@ -21,16 +21,7 @@ Reservation.belongsTo(Table, { foreignKey: "id_table" });
 Review.belongsTo(Client, { foreignKey: "id_client" });
 Client.hasMany(Review, { foreignKey: "id_client" });
 
-User.belongsToMany(Role, {
-  through: "user_roles",
-  foreignKey: "user_id",
-  otherKey: "role_id"
-});
-
-Role.belongsToMany(User, {
-  through: "user_roles",
-  foreignKey: "role_id",
-  otherKey: "user_id"
-});
+Role.hasMany(User, { foreignKey: "roleId", sourceKey: "id_role" });
+User.belongsTo(Role, { foreignKey: "roleId", targetKey: "id_role" });
 
 export { User, Role, Category, Menu, Reservation, Client, Table, Review };
