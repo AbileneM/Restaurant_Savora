@@ -30,6 +30,11 @@ const User = sequelize.define("users", {
     allowNull: false
   },
 
+  roleId: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+
 }, {
   // Désactive createdAt et updatedAt
   timestamps: false

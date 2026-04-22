@@ -9,6 +9,8 @@ import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 
+dotenv.config();
+
 import database from './config/db.js';
 import route from "./routes/userRoute.js";
 
@@ -37,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || "savora-dev-session-secret",
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
@@ -84,6 +86,5 @@ app.use("/roles", roleWebRoute);
 app.use('/public', express.static('public'))
 
 //Demarrage du serveur
-dotenv.config()
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Le serveur tourne sur le port ${PORT}`));

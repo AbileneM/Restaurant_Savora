@@ -122,22 +122,21 @@ roleWebRoute.delete("/:id", async (req, res) => {
 
 roleWebRoute.get("/:id/users", async (req, res) => {
   try {
-    const role = await Role.findByPk(req.params.id, {
-      include: {
-        model: User,
-        through: { attributes: [] },
-        attributes: { exclude: ["password"] }
-      }
-    });
+    const role = await Role.findByPk(req.params.id);
 
     if (!role) {
       return res.status(404).redirect("/roles");
     }
 
+    const users = await role.getUsers({
+      attributes: { exclude: ["password"] },
+      order: [["id_user", "ASC"]]
+    });
+
     res.render("roles/role-users", {
       title: "Utilisateurs du role",
       role,
-      users: role.users || [],
+      users,
       error: null
     });
   } catch (error) {

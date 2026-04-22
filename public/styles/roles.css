@@ -1,0 +1,153 @@
+.roles-main {
+  background: #f7f4ef;
+  color: #1f2937;
+  min-height: 60vh;
+  padding: 260px 32px 72px;
+}
+
+.roles-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.roles-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.roles-kicker {
+  color: #b08a4a;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.roles-title {
+  color: #1d2d50;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 42px;
+  margin-top: 8px;
+}
+
+.roles-card {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  overflow: hidden;
+}
+
+.roles-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.roles-table th {
+  background: #1d2d50;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  padding: 14px 18px;
+  text-transform: uppercase;
+}
+
+.roles-table td {
+  border-top: 1px solid #eee5da;
+  padding: 14px 18px;
+}
+
+.roles-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.roles-button,
+.roles-link,
+.roles-danger {
+  border-radius: 6px;
+  display: inline-flex;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.roles-button {
+  background: #1d2d50;
+  color: #fff;
+}
+
+.roles-button:hover {
+  background: #b08a4a;
+}
+
+.roles-link {
+  border: 1px solid #d4c7b8;
+  color: #1d2d50;
+}
+
+.roles-danger {
+  background: #b91c1c;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.roles-form {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  padding: 28px;
+}
+
+.roles-form label {
+  color: #1d2d50;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.roles-form input {
+  border: 1px solid #d4c7b8;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.roles-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #b91c1c;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+}
+
+.roles-muted {
+  color: #5f6772;
+}
+
+@media (max-width: 760px) {
+  .roles-main {
+    padding: 220px 18px 56px;
+  }
+
+  .roles-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .roles-title {
+    font-size: 34px;
+  }
+}

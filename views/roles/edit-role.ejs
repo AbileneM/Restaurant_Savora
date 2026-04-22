@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <%- include('../head') %>
+<link rel="stylesheet" href="/public/styles/roles.css?v=1">
 
 <body class="min-h-screen bg-[#f7f4ef] text-[#1f2937]">
   <%- include('../header') %>
 
-  <main class="px-6 pb-16 pt-36">
-    <section class="mx-auto max-w-2xl">
+  <main class="roles-main">
+    <section class="roles-container">
       <div class="mb-8">
         <a href="/roles" class="text-sm font-medium text-[#b08a4a] hover:text-[#1d2d50]">Retour aux roles</a>
-        <h1 class="mt-3 font-serif text-4xl font-bold text-[#1d2d50]"><%= title %></h1>
+        <h1 class="roles-title"><%= title %></h1>
       </div>
 
       <% if (error) { %>
-        <div class="mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+        <div class="roles-error">
           <%= error %>
         </div>
       <% } %>
 
-      <form action="/roles/<%= role.id_role %>?_method=PUT" method="POST" class="rounded-md border border-[#ddd6cc] bg-white p-6 shadow-sm">
+      <form action="/roles/<%= role.id_role %>?_method=PUT" method="POST" class="roles-form">
         <div>
-          <label for="name" class="block text-sm font-semibold uppercase tracking-wide text-[#1d2d50]">Nom du role</label>
+          <label for="name">Nom du role</label>
           <input
             type="text"
             id="name"
@@ -28,15 +29,14 @@
             value="<%= role.name || '' %>"
             required
             maxlength="50"
-            class="mt-2 w-full rounded-md border border-[#d4c7b8] px-4 py-3 outline-none transition focus:border-[#b08a4a]"
           >
         </div>
 
         <div class="mt-6 flex flex-wrap gap-3">
-          <button type="submit" class="rounded-md bg-[#1d2d50] px-5 py-3 font-medium text-white transition hover:bg-[#b08a4a]">
+          <button type="submit" class="roles-button">
             Mettre a jour
           </button>
-          <a href="/roles" class="rounded-md border border-[#d4c7b8] px-5 py-3 font-medium text-[#1d2d50] transition hover:bg-[#f7f4ef]">
+          <a href="/roles" class="roles-link">
             Annuler
           </a>
         </div>
