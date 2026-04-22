@@ -1,0 +1,142 @@
+.reviews-main {
+  background: #f7f4ef;
+  min-height: 70vh;
+  padding: 250px 24px 80px;
+}
+
+.reviews-container {
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+.reviews-kicker {
+  color: #b08a4a;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.reviews-title {
+  color: #1d2d50;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 46px;
+  margin: 8px 0 28px;
+}
+
+.reviews-layout {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+}
+
+.reviews-card {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  padding: 26px;
+}
+
+.review-item {
+  border-bottom: 1px solid #eee5da;
+  padding: 18px 0;
+}
+
+.review-item:first-child {
+  padding-top: 0;
+}
+
+.review-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.review-note {
+  color: #b08a4a;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.review-client {
+  color: #1d2d50;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.review-comment {
+  color: #5f6772;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+
+.reviews-form {
+  display: grid;
+  gap: 16px;
+}
+
+.reviews-form label {
+  color: #1d2d50;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.reviews-form input,
+.reviews-form textarea {
+  border: 1px solid #d4c7b8;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.reviews-form textarea {
+  min-height: 120px;
+}
+
+.reviews-button {
+  background: #1d2d50;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 12px 16px;
+}
+
+.reviews-button:hover {
+  background: #b08a4a;
+}
+
+.reviews-error,
+.reviews-success {
+  border-radius: 6px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+}
+
+.reviews-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.reviews-success {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #047857;
+}
+
+.reviews-empty {
+  color: #5f6772;
+}
+
+@media (max-width: 900px) {
+  .reviews-layout {
+    grid-template-columns: 1fr;
+  }
+}

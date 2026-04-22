@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('head') %>
+<link rel="stylesheet" href="/public/styles/reviews.css?v=1">
+
+<body>
+  <%- include('header') %>
+
+  <main class="reviews-main">
+    <section class="reviews-container">
+      <p class="reviews-kicker">Experience Savora</p>
+      <h1 class="reviews-title"><%= title %></h1>
+
+      <% if (success) { %>
+        <div class="reviews-success"><%= success %></div>
+      <% } %>
+
+      <% if (error) { %>
+        <div class="reviews-error"><%= error %></div>
+      <% } %>
+
+      <div class="reviews-layout">
+        <div class="reviews-card">
+          <% if (!reviews.length) { %>
+            <p class="reviews-empty">Aucun avis pour le moment.</p>
+          <% } %>
+
+          <% reviews.forEach(review => { %>
+            <article class="review-item">
+              <div class="review-note">Note: <%= review.note %>/5</div>
+              <p class="review-client">
+                <%= review.client ? `${review.client.nom} ${review.client.prenom}` : 'Client Savora' %>
+              </p>
+              <% if (review.commentaire) { %>
+                <p class="review-comment"><%= review.commentaire %></p>
+              <% } %>
+            </article>
+          <% }) %>
+        </div>
+
+        <form action="/reviews" method="POST" class="reviews-card reviews-form">
+          <div>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" value="<%= form.nom || '' %>" required>
+          </div>
+
+          <div>
+            <label for="prenom">Prenom</label>
+            <input type="text" id="prenom" name="prenom" value="<%= form.prenom || '' %>" required>
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<%= form.email || '' %>" required>
+          </div>
+
+          <div>
+            <label for="note">Note</label>
+            <input type="number" id="note" name="note" min="1" max="5" value="<%= form.note || '' %>" required>
+          </div>
+
+          <div>
+            <label for="commentaire">Commentaire</label>
+            <textarea id="commentaire" name="commentaire"><%= form.commentaire || '' %></textarea>
+          </div>
+
+          <button type="submit" class="reviews-button">Envoyer l'avis</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+</body>
+</html>

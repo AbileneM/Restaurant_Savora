@@ -29,6 +29,7 @@ import roleWebRoute from "./routes/roleWebRoute.js";
 import userWebRoute from "./routes/userWebRoute.js";
 import adminWebRoute from "./routes/adminWebRoute.js";
 import reservationWebRoute from "./routes/reservationWebRoute.js";
+import reviewWebRoute from "./routes/reviewWebRoute.js";
 
 
 const app = express();
@@ -63,9 +64,6 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/menu', (req, res) => {
   res.render('menu');
 });
-app.get('/reviews', (req, res) => {
-  res.render('reviews');
-});
 app.get('/table', (req, res) => res.redirect('/reservation'));
 
 app.get('/login', (req, res) => {
@@ -90,6 +88,7 @@ app.use("/admin", adminWebRoute);
 app.use("/roles", roleWebRoute);
 app.use("/users", userWebRoute);
 app.use("/reservation", reservationWebRoute);
+app.use("/reviews", reviewWebRoute);
 
 
 app.use('/public', express.static('public'))
