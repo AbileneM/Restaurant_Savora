@@ -15,8 +15,10 @@
         <% Object.entries(resources).forEach(([name, resource]) => { %>
           <a href="/admin/<%= name %>" class="admin-card"><%= resource.title %></a>
         <% }) %>
-        <a href="/roles" class="admin-card">Roles</a>
-        <a href="/users" class="admin-card">Users</a>
+        <% if (adminRole === 'admin' || adminRole === 'administrateur') { %>
+          <a href="/roles" class="admin-card">Roles</a>
+          <a href="/users" class="admin-card">Users</a>
+        <% } %>
       </div>
     </section>
   </main>

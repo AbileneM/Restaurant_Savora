@@ -7,6 +7,11 @@ const Table = sequelize.define("tables", {
     primaryKey: true,
     autoIncrement: true
   },
+  numero_table: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    unique: true
+  },
   capacite: {
     type: DataTypes.INTEGER,
     allowNull: false

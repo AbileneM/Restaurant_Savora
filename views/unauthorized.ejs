@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('head') %>
+<link rel="stylesheet" href="/public/styles/espace.css?v=1">
+
+<body>
+  <%- include('header') %>
+
+  <main class="account-main">
+    <section class="account-container">
+      <p class="account-kicker">Autorisation</p>
+      <h1 class="account-title"><%= title %></h1>
+
+      <div class="account-summary">
+        <div>
+          <p class="account-label">Message</p>
+          <p class="account-email"><%= message %></p>
+        </div>
+
+        <a href="/espace" class="account-logout">Retour</a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+</body>
+</html>

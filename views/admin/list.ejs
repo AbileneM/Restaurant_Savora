@@ -21,6 +21,10 @@
         <div class="admin-error"><%= error %></div>
       <% } %>
 
+      <% if (success) { %>
+        <div class="admin-success"><%= success %></div>
+      <% } %>
+
       <div class="admin-panel">
         <table class="admin-table">
           <thead>
@@ -48,7 +52,11 @@
                 <td>
                   <div class="admin-actions">
                     <a href="/admin/<%= resourceName %>/edit/<%= row[resource.pk] %>" class="admin-link">Modifier</a>
-                    <form action="/admin/<%= resourceName %>/<%= row[resource.pk] %>?_method=DELETE" method="POST">
+                    <form
+                      action="/admin/<%= resourceName %>/<%= row[resource.pk] %>?_method=DELETE"
+                      method="POST"
+                      onsubmit="return confirm('Confirmer la suppression ?');"
+                    >
                       <button type="submit" class="admin-danger">Supprimer</button>
                     </form>
                   </div>

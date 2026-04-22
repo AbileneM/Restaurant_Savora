@@ -162,6 +162,15 @@
   padding: 12px 14px;
 }
 
+.admin-success {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  color: #047857;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+}
+
 .admin-muted {
   color: #5f6772;
 }

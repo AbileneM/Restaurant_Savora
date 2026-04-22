@@ -1,7 +1,20 @@
 import { Router } from "express";
-import { Category, Client, Menu, Reservation, Review, Table } from "../models/Relation.js";
+import { Category, Client, Menu, Reservation, Review, Table, User, Role } from "../models/Relation.js";
+import { normalizeRole } from "../auth/autorisation.js";
 
 const adminWebRoute = Router();
+
+const resourceAccess = {
+  admin: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  administrateur: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  coordinateur: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  coordonnateur: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  coordonateur: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  cordina: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  cordin: ["categories", "menu", "clients", "tables", "reservations", "reviews"],
+  employe: ["reservations", "reviews"],
+  employee: ["reservations", "reviews"]
+};
 
 const resources = {
   categories: {
@@ -59,10 +72,12 @@ const resources = {
     model: Table,
     pk: "id_table",
     fields: [
+      { name: "numero_table", label: "Numero de table", type: "number", required: true },
       { name: "capacite", label: "Capacite", type: "number", required: true },
       { name: "disponibilite", label: "Disponible", type: "checkbox" }
     ],
     columns: [
+      { key: "numero_table", label: "Numero" },
       { key: "capacite", label: "Capacite" },
       { key: "disponibilite", label: "Disponible", boolean: true }
     ]
@@ -73,21 +88,21 @@ const resources = {
     pk: "id_reservation",
     refs: {
       clients: async () => Client.findAll({ order: [["nom", "ASC"], ["prenom", "ASC"]] }),
-      tables: async () => Table.findAll({ order: [["id_table", "ASC"]] })
+      tables: async () => Table.findAll({ order: [["numero_table", "ASC"], ["id_table", "ASC"]] })
     },
     fields: [
       { name: "date_reservation", label: "Date", type: "date", required: true },
       { name: "heure_reservation", label: "Heure", type: "time", required: true },
       { name: "nombre_personnes", label: "Nombre de personnes", type: "number", required: true },
       { name: "id_client", label: "Client", type: "select", options: "clients", optionValue: "id_client", optionLabel: item => `${item.nom} ${item.prenom}` },
-      { name: "id_table", label: "Table", type: "select", options: "tables", optionValue: "id_table", optionLabel: item => `Table ${item.id_table} (${item.capacite} places)` }
+      { name: "id_table", label: "Table", type: "select", options: "tables", optionValue: "id_table", optionLabel: item => `Table ${item.numero_table || item.id_table} (${item.capacite} places)` }
     ],
     columns: [
       { key: "date_reservation", label: "Date" },
       { key: "heure_reservation", label: "Heure" },
       { key: "nombre_personnes", label: "Personnes" },
       { key: "id_client", label: "Client", ref: "clients", optionValue: "id_client", optionLabel: item => `${item.nom} ${item.prenom}` },
-      { key: "id_table", label: "Table", ref: "tables", optionValue: "id_table", optionLabel: item => `Table ${item.id_table}` }
+      { key: "id_table", label: "Table", ref: "tables", optionValue: "id_table", optionLabel: item => `Table ${item.numero_table || item.id_table}` }
     ]
   },
   reviews: {
@@ -111,6 +126,43 @@ const resources = {
 };
 
 const getResource = name => resources[name];
+
+const getAllowedResources = roleName => resourceAccess[normalizeRole(roleName)] || [];
+
+const redirectWithSuccess = (res, resourceName, message) => {
+  res.redirect(`/admin/${resourceName}?success=${encodeURIComponent(message)}`);
+};
+
+adminWebRoute.use(async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.userId, { include: Role });
+    if (!user) return res.redirect("/login");
+
+    req.currentAdminUser = user;
+    req.currentAdminRole = normalizeRole(user.role?.name);
+    res.locals.adminRole = req.currentAdminRole;
+    res.locals.allowedAdminResources = getAllowedResources(user.role?.name);
+
+    next();
+  } catch (error) {
+    res.status(403).render("unauthorized", {
+      title: "Acces refuse",
+      message: error.message
+    });
+  }
+});
+
+const requireResourceAccess = (req, res, next) => {
+  const resourceName = req.params.resource;
+  const allowedResources = getAllowedResources(req.currentAdminRole);
+
+  if (allowedResources.includes(resourceName)) return next();
+
+  return res.status(403).render("unauthorized", {
+    title: "Acces refuse",
+    message: "Votre role ne permet pas d'acceder a cette section."
+  });
+};
 
 const loadRefs = async resource => {
   const refs = {};
@@ -161,13 +213,18 @@ const formData = (resource, body) => {
 };
 
 adminWebRoute.get("/", (req, res) => {
+  const allowedResources = getAllowedResources(req.currentAdminRole);
+  const visibleResources = Object.fromEntries(
+    Object.entries(resources).filter(([name]) => allowedResources.includes(name))
+  );
+
   res.render("admin/dashboard", {
     title: "Administration",
-    resources
+    resources: visibleResources
   });
 });
 
-adminWebRoute.get("/:resource", async (req, res) => {
+adminWebRoute.get("/:resource", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
@@ -183,7 +240,8 @@ adminWebRoute.get("/:resource", async (req, res) => {
       rows,
       refs,
       displayValue,
-      error: null
+      error: null,
+      success: req.query.success || null
     });
   } catch (error) {
     res.status(500).render("admin/list", {
@@ -192,12 +250,13 @@ adminWebRoute.get("/:resource", async (req, res) => {
       rows: [],
       refs: {},
       displayValue,
-      error: error.message
+      error: error.message,
+      success: null
     });
   }
 });
 
-adminWebRoute.get("/:resource/add", async (req, res) => {
+adminWebRoute.get("/:resource/add", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
@@ -212,13 +271,13 @@ adminWebRoute.get("/:resource/add", async (req, res) => {
   });
 });
 
-adminWebRoute.post("/:resource", async (req, res) => {
+adminWebRoute.post("/:resource", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
   try {
     await resource.model.create(formData(resource, req.body));
-    res.redirect(`/admin/${req.params.resource}`);
+    redirectWithSuccess(res, req.params.resource, "Ajout effectue avec succes.");
   } catch (error) {
     res.status(400).render("admin/form", {
       mode: "add",
@@ -232,7 +291,7 @@ adminWebRoute.post("/:resource", async (req, res) => {
   }
 });
 
-adminWebRoute.get("/:resource/edit/:id", async (req, res) => {
+adminWebRoute.get("/:resource/edit/:id", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
@@ -250,7 +309,7 @@ adminWebRoute.get("/:resource/edit/:id", async (req, res) => {
   });
 });
 
-adminWebRoute.put("/:resource/:id", async (req, res) => {
+adminWebRoute.put("/:resource/:id", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
@@ -259,7 +318,7 @@ adminWebRoute.put("/:resource/:id", async (req, res) => {
     if (!record) return res.status(404).redirect(`/admin/${req.params.resource}`);
 
     await record.update(formData(resource, req.body));
-    res.redirect(`/admin/${req.params.resource}`);
+    redirectWithSuccess(res, req.params.resource, "Modification effectuee avec succes.");
   } catch (error) {
     res.status(400).render("admin/form", {
       mode: "edit",
@@ -273,14 +332,14 @@ adminWebRoute.put("/:resource/:id", async (req, res) => {
   }
 });
 
-adminWebRoute.delete("/:resource/:id", async (req, res) => {
+adminWebRoute.delete("/:resource/:id", requireResourceAccess, async (req, res) => {
   const resource = getResource(req.params.resource);
   if (!resource) return res.status(404).redirect("/admin");
 
   try {
     const record = await resource.model.findByPk(req.params.id);
     if (record) await record.destroy();
-    res.redirect(`/admin/${req.params.resource}`);
+    redirectWithSuccess(res, req.params.resource, "Suppression effectuee avec succes.");
   } catch (error) {
     const rows = await resource.model.findAll({ order: [[resource.pk, "ASC"]] });
     const refs = await loadRefs(resource);
@@ -291,7 +350,8 @@ adminWebRoute.delete("/:resource/:id", async (req, res) => {
       rows,
       refs,
       displayValue,
-      error: error.message
+      error: error.message,
+      success: null
     });
   }
 });

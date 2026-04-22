@@ -1,4 +1,4 @@
-import { User } from "../models/Relation.js";
+import { Role, User } from "../models/Relation.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { validationResult } from "express-validator";
@@ -7,7 +7,7 @@ export const loginForm = (req, res) => {
     const token = req.cookies.token  // Check if token is in cookies 
     
     //Verification de la presence du token
-    if (token) return res.redirect('/users') // Redirect to login if token is not present
+    if (token) return res.redirect('/espace') // Redirect to account if token is present
     
     res.render('login', { title: 'Connexion', error: null, email: '' })
 }
@@ -44,7 +44,7 @@ export const login = async (req, res) => {
     //Chercher la personne dans la base de données
 
     try {
-        const user = await User.findOne({ where: { email }})
+        const user = await User.findOne({ where: { email }, include: Role })
 
         //Verifier la presence de cette personne dans la base de donnees
         if (!user) return res.status(404).render('login', {
@@ -71,10 +71,11 @@ export const login = async (req, res) => {
             id_user: user.id_user,
             nom: user.nom,
             email: user.email,
-            roleId: user.roleId
+            roleId: user.roleId,
+            roleName: user.role?.name || null
         }
         res.cookie('token', token, { httpOnly: true }).cookie('user', JSON.stringify(safeUser), { httpOnly: true })
-        res.redirect('/users') // Redirect to users page after successful login 
+        res.redirect('/espace') // Redirect to account page after successful login 
 
     } catch (error) {
         res.status(400).render('login', {

@@ -1,5 +1,12 @@
 import { User, Role } from '../models/Relation.js'
 
+const normalizeRole = role => (role || "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+
 const autoriser = roles => async (req, res, next) => {
 
     //Recuperer l'ID a partir de la req
@@ -15,12 +22,12 @@ const autoriser = roles => async (req, res, next) => {
         const userRoles = user.role ? [user.role] : []
 
         let hasRole = false
-        const userRoleTitles = userRoles.map(role => role.name.toLowerCase())
+        const userRoleTitles = userRoles.map(role => normalizeRole(role.name))
 
         if (!userRoles.length) return res.status(403).json({ message: "Vous n'avez pas la permission!" })
 
         roles?.forEach(role => {
-            if (userRoleTitles.includes(role.toLowerCase()))
+            if (userRoleTitles.includes(normalizeRole(role)))
                 hasRole = true
         });
 
@@ -38,4 +45,31 @@ const autoriser = roles => async (req, res, next) => {
 
 }
 
+export const autoriserWeb = roles => async (req, res, next) => {
+    try {
+        const user = await User.findByPk(req.userId, { include: Role })
+        if (!user) return res.redirect('/login')
+
+        const userRole = normalizeRole(user.role?.name)
+        const allowedRoles = roles.map(normalizeRole)
+
+        if (allowedRoles.includes(userRole)) {
+            req.currentUser = user
+            req.currentRole = userRole
+            return next()
+        }
+
+        return res.status(403).render('unauthorized', {
+            title: 'Acces refuse',
+            message: "Vous n'avez pas la permission d'acceder a cette page."
+        })
+    } catch (error) {
+        return res.status(403).render('unauthorized', {
+            title: 'Acces refuse',
+            message: error.message
+        })
+    }
+}
+
+export { normalizeRole }
 export default autoriser

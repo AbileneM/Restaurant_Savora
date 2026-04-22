@@ -9,11 +9,14 @@ import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import { login, logout } from "./auth/loginControllers.js";
+import { autoriserWeb } from "./auth/autorisation.js";
+import { verifierToken } from "./auth/verifyToken.js";
 import loginRules from "./validations/loginValidation.js";
 
 dotenv.config();
 
 import database from './config/db.js';
+import { Role, User } from "./models/Relation.js";
 import route from "./routes/userRoute.js";
 
 //Importation des routes
@@ -53,6 +56,20 @@ app.use(session({
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
+app.use((req, res, next) => {
+  res.locals.currentUser = null;
+
+  if (req.cookies.user) {
+    try {
+      res.locals.currentUser = JSON.parse(req.cookies.user);
+    } catch {
+      res.clearCookie("user");
+    }
+  }
+
+  next();
+});
+
 //Creation des tables dans la base de données
 //database.sync({ alter: true })
    // .then(() => console.log('La base de données a été synchronisée avec succès.'))
@@ -67,7 +84,28 @@ app.get('/menu', (req, res) => {
 app.get('/table', (req, res) => res.redirect('/reservation'));
 
 app.get('/login', (req, res) => {
+  if (req.cookies.token) return res.redirect('/espace');
   res.render('login', { title: 'Connexion', error: null, email: '' });
+});
+
+app.get('/espace', verifierToken, async (req, res) => {
+  const user = await User.findByPk(req.userId, { include: Role });
+  const roleName = user?.role?.name || res.locals.currentUser?.roleName || "";
+  const normalizedRole = roleName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+  res.render('espace', {
+    title: 'Mon espace',
+    accountUser: user,
+    roleName,
+    access: {
+      canManageUsers: ["admin", "administrateur"].includes(normalizedRole),
+      canManageAdmin: ["admin", "administrateur", "coordinateur", "coordonnateur", "coordonateur", "cordina", "cordin", "employe", "employee"].includes(normalizedRole)
+    }
+  });
 });
 
 //Les routes
@@ -84,9 +122,9 @@ app.use("/api/roles", rolesRoute);
 app.use("/api/users", route);
 
 //Routes EJS
-app.use("/admin", adminWebRoute);
-app.use("/roles", roleWebRoute);
-app.use("/users", userWebRoute);
+app.use("/admin", verifierToken, adminWebRoute);
+app.use("/roles", verifierToken, autoriserWeb(["Admin"]), roleWebRoute);
+app.use("/users", verifierToken, autoriserWeb(["Admin"]), userWebRoute);
 app.use("/reservation", reservationWebRoute);
 app.use("/reviews", reviewWebRoute);
 

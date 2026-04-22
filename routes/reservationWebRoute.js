@@ -4,16 +4,21 @@ import { Client, Reservation, Table } from "../models/Relation.js";
 const reservationWebRoute = Router();
 
 const loadTables = () => Table.findAll({
-  order: [["capacite", "ASC"], ["id_table", "ASC"]]
+  where: { disponibilite: true },
+  order: [["capacite", "ASC"], ["numero_table", "ASC"], ["id_table", "ASC"]]
+});
+
+const renderReservation = async (res, status, options) => res.status(status).render("reservation", {
+  title: "Reservation",
+  tables: await loadTables(),
+  form: options.form || {},
+  success: options.success || null,
+  error: options.error || null
 });
 
 reservationWebRoute.get("/", async (req, res) => {
-  res.render("reservation", {
-    title: "Reservation",
-    tables: await loadTables(),
-    form: {},
-    success: null,
-    error: null
+  renderReservation(res, 200, {
+    form: {}
   });
 });
 
@@ -29,14 +34,9 @@ reservationWebRoute.post("/", async (req, res) => {
     id_table
   } = req.body;
 
-  const tables = await loadTables();
-
   if (!nom?.trim() || !prenom?.trim() || !email?.trim() || !date_reservation || !heure_reservation || !nombre_personnes || !id_table) {
-    return res.status(400).render("reservation", {
-      title: "Reservation",
-      tables,
+    return renderReservation(res, 400, {
       form: req.body,
-      success: null,
       error: "Veuillez remplir tous les champs obligatoires."
     });
   }
@@ -45,22 +45,38 @@ reservationWebRoute.post("/", async (req, res) => {
     const table = await Table.findByPk(id_table);
 
     if (!table) {
-      return res.status(400).render("reservation", {
-        title: "Reservation",
-        tables,
+      return renderReservation(res, 400, {
         form: req.body,
-        success: null,
         error: "La table selectionnee est introuvable."
       });
     }
 
-    if (Number(nombre_personnes) > Number(table.capacite)) {
-      return res.status(400).render("reservation", {
-        title: "Reservation",
-        tables,
+    if (!table.disponibilite) {
+      return renderReservation(res, 400, {
         form: req.body,
-        success: null,
+        error: "La table selectionnee n'est pas disponible."
+      });
+    }
+
+    if (Number(nombre_personnes) > Number(table.capacite)) {
+      return renderReservation(res, 400, {
+        form: req.body,
         error: "La table selectionnee n'a pas assez de places."
+      });
+    }
+
+    const existingReservation = await Reservation.findOne({
+      where: {
+        id_table,
+        date_reservation,
+        heure_reservation
+      }
+    });
+
+    if (existingReservation) {
+      return renderReservation(res, 400, {
+        form: req.body,
+        error: "Cette table est deja reservee pour cette date et cette heure."
       });
     }
 
@@ -87,19 +103,13 @@ reservationWebRoute.post("/", async (req, res) => {
       id_table
     });
 
-    res.render("reservation", {
-      title: "Reservation",
-      tables: await loadTables(),
+    renderReservation(res, 200, {
       form: {},
       success: "Votre reservation a ete enregistree avec succes.",
-      error: null
     });
   } catch (error) {
-    res.status(400).render("reservation", {
-      title: "Reservation",
-      tables,
+    renderReservation(res, 400, {
       form: req.body,
-      success: null,
       error: error.message
     });
   }

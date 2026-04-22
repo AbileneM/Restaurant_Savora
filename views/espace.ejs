@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('head') %>
+<link rel="stylesheet" href="/public/styles/espace.css?v=1">
+
+<body>
+  <%- include('header') %>
+
+  <main class="account-main">
+    <section class="account-container">
+      <p class="account-kicker">Administration</p>
+      <h1 class="account-title">Mon espace</h1>
+
+      <div class="account-summary">
+        <div>
+          <p class="account-label">Utilisateur connecte</p>
+          <p class="account-name"><%= accountUser ? accountUser.nom : 'Utilisateur' %></p>
+          <p class="account-email"><%= accountUser ? accountUser.email : '' %></p>
+          <p class="account-email">Role: <%= roleName || 'Non defini' %></p>
+        </div>
+
+        <a href="/logout" class="account-logout">Deconnexion</a>
+      </div>
+
+      <div class="account-grid">
+        <% if (access.canManageAdmin) { %>
+          <a href="/admin" class="account-card">
+            <span>Administration</span>
+            <small>Gerer les sections autorisees selon votre role.</small>
+          </a>
+        <% } %>
+
+        <% if (access.canManageUsers) { %>
+          <a href="/users" class="account-card">
+            <span>Utilisateurs</span>
+            <small>Ajouter, modifier et supprimer les comptes utilisateurs.</small>
+          </a>
+
+          <a href="/roles" class="account-card">
+            <span>Roles</span>
+            <small>Gerer les roles utilises pour l'autorisation.</small>
+          </a>
+        <% } %>
+      </div>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+</body>
+</html>

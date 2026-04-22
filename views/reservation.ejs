@@ -63,7 +63,7 @@
                 <option value="">Choisir une table</option>
                 <% tables.forEach(table => { %>
                   <option value="<%= table.id_table %>" <%= Number(form.id_table) === table.id_table ? 'selected' : '' %>>
-                    Table <%= table.id_table %> - <%= table.capacite %> places
+                    Table <%= table.numero_table || table.id_table %> - <%= table.capacite %> places
                   </option>
                 <% }) %>
               </select>
