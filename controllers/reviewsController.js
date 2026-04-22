@@ -10,9 +10,9 @@ export const getAllReviews = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+}; 
 
-// Récupérer un avis par son id
+// Récupération de l'avis par son id
 export const getReviewById = async (req, res) => {
   try {
     const review = await Review.findByPk(req.params.id, {
