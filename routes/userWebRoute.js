@@ -5,6 +5,8 @@ import { Role, User } from "../models/Relation.js";
 const userWebRoute = Router();
 
 const loadRoles = () => Role.findAll({ order: [["id_role", "ASC"]] });
+const passwordRulesMessage = "Le mot de passe doit contenir au moins 7 caracteres, une majuscule, une minuscule, un chiffre et un caractere special.";
+const isStrongPassword = password => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{7,}$/.test(password || "");
 
 userWebRoute.get("/", async (req, res) => {
   try {
@@ -48,6 +50,15 @@ userWebRoute.post("/", async (req, res) => {
       user: req.body,
       roles,
       error: "Le nom, l'email et le mot de passe sont obligatoires."
+    });
+  }
+
+  if (!isStrongPassword(password)) {
+    return res.status(400).render("users/add-user-web", {
+      title: "Ajouter un utilisateur",
+      user: req.body,
+      roles,
+      error: passwordRulesMessage
     });
   }
 
@@ -121,6 +132,15 @@ userWebRoute.put("/:id", async (req, res) => {
     };
 
     if (password?.trim()) {
+      if (!isStrongPassword(password)) {
+        return res.status(400).render("users/edit-user-web", {
+          title: "Modifier un utilisateur",
+          user: { ...user.toJSON(), ...req.body },
+          roles,
+          error: passwordRulesMessage
+        });
+      }
+
       updateData.password = bcrypt.hashSync(password, 10);
     }
 

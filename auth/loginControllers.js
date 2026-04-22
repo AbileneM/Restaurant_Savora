@@ -9,16 +9,13 @@ export const loginForm = (req, res) => {
     //Verification de la presence du token
     if (token) return res.redirect('/users') // Redirect to login if token is not present
     
-    res.render('./users/login') // Rendu de la vue login.ejs
+    res.render('login', { title: 'Connexion', error: null, email: '' })
 }
 
 export const logout = (req, res) => {
-    const token = req.cookies.token  // Check if token is in cookies 
-    
-    //Verification de la presence du token
-    if (token) return res.clearCookie('token').redirect('/login') // Redirect to login if token verification fails
-    
-    res.render('./users/login') // Rendu de la vue login.ejs
+    res.clearCookie('token')
+        .clearCookie('user')
+        .redirect('/login')
 }
 
 export const login = async (req, res) => {
@@ -26,7 +23,11 @@ export const login = async (req, res) => {
     //Recuperation des resultats de la validation 
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).render('login', {
+            title: 'Connexion',
+            error: errors.array()[0].msg,
+            email: req.body.email || ''
+        });
     }
     
     //Les informations de connexion
@@ -34,7 +35,11 @@ export const login = async (req, res) => {
     const { email, password } = req.body
 
     //Vérification de l'email
-    if (!email) return res.status(404).json({ message: "L'email est incorrect" })
+    if (!email) return res.status(404).render('login', {
+        title: 'Connexion',
+        error: "L'email est incorrect",
+        email: ''
+    })
 
     //Chercher la personne dans la base de données
 
@@ -42,22 +47,40 @@ export const login = async (req, res) => {
         const user = await User.findOne({ where: { email }})
 
         //Verifier la presence de cette personne dans la base de donnees
-        if (!user) return res.status(404).json({ message: "La personne n'existe pas!" })
+        if (!user) return res.status(404).render('login', {
+            title: 'Connexion',
+            error: "La personne n'existe pas!",
+            email
+        })
         //Verification du mot de passe
 
         const mdpCorrect = bcrypt.compareSync(password, user.password)
 
-        if (!mdpCorrect) return res.status(401).json({ message: "Mot de passe incorrect" })
+        if (!mdpCorrect) return res.status(401).render('login', {
+            title: 'Connexion',
+            error: "Mot de passe incorrect",
+            email
+        })
 
         //Creation de la clef d'acces
-        const payload = { id: user.id }
-        const token = jwt.sign(payload, process.env.CODE_SECRET)
+        const payload = { id: user.id_user }
+        const token = jwt.sign(payload, process.env.CODE_SECRET || 'savora-dev-jwt-secret')
 
         // res.status(200).json({ data: user, token })
-        res.cookie('token', token,{ httpOnly: true}).cookie('user',JSON.stringify(user), { httpOnly: true}) // Set cookie with token
+        const safeUser = {
+            id_user: user.id_user,
+            nom: user.nom,
+            email: user.email,
+            roleId: user.roleId
+        }
+        res.cookie('token', token, { httpOnly: true }).cookie('user', JSON.stringify(safeUser), { httpOnly: true })
         res.redirect('/users') // Redirect to users page after successful login 
 
     } catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).render('login', {
+            title: 'Connexion',
+            error: error.message,
+            email: email || ''
+        })
     }
 }

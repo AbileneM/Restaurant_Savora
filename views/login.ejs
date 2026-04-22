@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('head') %>
+<link rel="stylesheet" href="/public/styles/login.css?v=1">
+
+<body>
+  <%- include('header') %>
+
+  <main class="login-main">
+    <section class="login-card">
+      <p class="login-kicker">Administration</p>
+      <h1 class="login-title"><%= title %></h1>
+
+      <% if (error) { %>
+        <div class="login-error"><%= error %></div>
+      <% } %>
+
+      <form action="/login" method="POST" class="login-form">
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="<%= email || '' %>" required>
+        </div>
+
+        <div>
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="login-button">Se connecter</button>
+      </form>
+    </section>
+  </main>
+
+  <%- include('footer') %>
+</body>
+</html>

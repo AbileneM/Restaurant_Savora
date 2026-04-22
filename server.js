@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import { login, logout } from "./auth/loginControllers.js";
+import loginRules from "./validations/loginValidation.js";
 
 dotenv.config();
 
@@ -67,10 +69,12 @@ app.get('/table', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { title: 'Connexion', error: null, email: '' });
 });
 
 //Les routes
+app.post("/login", loginRules, login);
+app.get("/logout", logout);
 app.use("/api/auth", authRoute);
 app.use("/api/categories", categoriesRoute);
 app.use("/api/menu", menuRoute);
